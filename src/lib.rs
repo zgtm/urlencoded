@@ -78,7 +78,7 @@ impl Key for UrlEncodedQuery {
     type Value = QueryMap;
 }
 
-impl<'a, 'b> plugin::Plugin<Request<'a, 'b>> for UrlEncodedQuery {
+impl plugin::Plugin<Request> for UrlEncodedQuery {
     type Error = UrlDecodingError;
 
     fn eval(req: &mut Request) -> QueryResult {
@@ -89,7 +89,7 @@ impl<'a, 'b> plugin::Plugin<Request<'a, 'b>> for UrlEncodedQuery {
     }
 }
 
-impl<'a, 'b> plugin::Plugin<Request<'a, 'b>> for UrlEncodedBody {
+impl plugin::Plugin<Request> for UrlEncodedBody {
     type Error = UrlDecodingError;
 
     fn eval(req: &mut Request) -> QueryResult {

@@ -3,7 +3,7 @@ extern crate iron;
 extern crate urlencoded;
 
 use iron::prelude::*;
-use iron::status;
+use iron::StatusCode;
 use urlencoded::UrlEncodedBody;
 
 fn log_post_data(req: &mut Request) -> IronResult<Response> {
@@ -12,10 +12,10 @@ fn log_post_data(req: &mut Request) -> IronResult<Response> {
         Err(ref e) => println!("{:?}", e)
     };
 
-    Ok(Response::with((status::Ok, "Hello!")))
+    Ok(Response::with((StatusCode::OK, "Hello!")))
 }
 
 // Test with `curl -i -X POST "http://localhost:3000/" --data "fruit=apple&name=iron&fruit=pear"`
 fn main() {
-    Iron::new(log_post_data).http("127.0.0.1:3000").unwrap();
+    Iron::new(log_post_data).http("127.0.0.1:3000");
 }
